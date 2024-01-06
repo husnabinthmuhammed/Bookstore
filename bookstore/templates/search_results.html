@@ -1,0 +1,26 @@
+{% extends 'home.html'%}
+{% load static %}
+{% block title %} Search {% endblock title %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'search_results.css' %}">
+    <title>Title</title>
+</head>
+<body>
+    <h3 class="text-secondary">Search Results</h3><hr>
+    {% for every in object_list %}
+    <div>
+        <h3><a href="{% url 'details' every.pk%}">{{every.title}}</a> </h3>
+        <img src={{every.image_url}}>
+        <p>Author : {{ every.author }}</p>
+    </div>
+    {% empty %}
+    <h5 class="text-danger">Nothing found :(</h5>
+    {% endfor %}
+</body>
+</html>
+{% endblock content %}

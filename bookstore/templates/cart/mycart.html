@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'mycart.css' %}">
+</head>
+<body>
+<div class="container-fluid">
+    {% if cart_items %}
+    <h2>My Cart</h2><img
+    height="40px;"
+    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfhiJNMw6NxnwJwjZv1rMkm4zL-0b-AAPUog&usqp=CAU"width="40px">
+</div>
+<ul class="list-group">
+        {% for cart_item in cart_items %}
+    <div class="row">
+        <div class="col-sm">
+            <img alt="{{ cart_item.book.title }}" class="card-img" src="{{ cart_item.book.image_url }}">
+        </div>
+        <div class="col-sm-10">
+            <h5>{{cart_item.books.title}}</h5>
+            <p>Price: {{ cart_item.book.price }}per Book</p>
+            <p>Quantity: {{ cart_item.quantity }}</p>
+            <p>Total: {{ cart_item.total_price }}</p>
+        </div>
+        <a class="btn btn-outline-danger" href="{% url 'remove_from_cart' book_id=cart_item.book.id %} " onclick="alert('Item removed from cart')">Remove from cart</a>
+    </div>
+    {% endfor %}
+
+    <a class="btn btn-outline-primary" href=" " onclick="alert('Payment Successfull')">Buy</a>
+    {% else %}
+    <p>Your cart is empty</p>
+    <a href="{% url 'books' %}">Continue shopping</a>
+
+</ul>
+
+{% endif %}
+
+
+
+
+</body>
+</html>
